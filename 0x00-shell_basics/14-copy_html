@@ -1,0 +1,3 @@
+#!/bin/bash
+
+for file in *.html; do [[ -f ../"$file" ]] && [[ $(stat -c %Y "$file") -gt $(stat -c %Y ../"$file") ]] && cp "$file" ../; done
