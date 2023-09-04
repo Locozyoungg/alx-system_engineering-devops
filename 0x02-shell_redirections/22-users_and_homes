@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -d ':' -f 1,6 /etc/passwd | grep -vE 'bin|nologin|false|/nonexistent' | sort -t ':' -k 1
+cut -d: -f1,6 /etc/passwd | grep -v -e '/bin/false' -e '/usr/sbin/nologin' -e '/bin/sync' -e '/bin' -e '/nonexistent' | sort -t: -k1
