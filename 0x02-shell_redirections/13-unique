@@ -1,2 +1,2 @@
 #!/bin/bash
-sort | uniq -c | while read -r count word; do [ "$count" -eq 1 ] && echo "$word"; done
+uniq -u < <(cat "$1")
