@@ -1,2 +1,2 @@
 #!/bin/bash
-uniq -u < <(cat "$1")
+sort -u < <(uniq < <(cat "$1"))
