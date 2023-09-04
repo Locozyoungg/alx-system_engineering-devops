@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type d -empty -print -o -type f -empty -print | xargs -I {} basename {}
+cat /etc/passwd | sort -k1 | awk -F: '{print $1":"$6}'
