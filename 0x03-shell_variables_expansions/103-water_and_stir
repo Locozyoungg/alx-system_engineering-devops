@@ -1,0 +1,2 @@
+#!/bin/bash
+WATER="ewwatratewa"; STIR="ti.itirtrtr"; result=""; if [ ${#WATER} -eq ${#STIR} ]; then for ((i=0; i<${#WATER}; i++)); do char1="${WATER:i:1}"; char2="${STIR:i:1}"; char_sum=$(( $(printf "%d" "'$char1") + $(printf "%d" "'$char2") )); result="${result}$(printf "\\x$(printf %x $char_sum)")"; done; fi; echo "$result"
