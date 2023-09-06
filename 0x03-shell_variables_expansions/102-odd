@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -n '' | grep -E '^[0-9]*[13579]:'
+while IFS= read -r line; do ((i++ % 2 == 0)) && echo "$line"; done
