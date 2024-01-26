@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# This script stops the 7-highlander process without using kill
+
+# Find the process ID of 7-highlander
+pid=$(pgrep -f "7-highlander")
+
+# Check if the process is running
+if [ -n "$pid" ]; then
+    echo "Stopping the process..."
+    # Use pkill to stop the process
+    pkill -f "7-highlander"
+else
+    echo "No matching process found."
+fi
+
