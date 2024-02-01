@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script contains questions and answers related to networking basics.
+
+# Question 1
+# What is the OSI model?
+# 1. Set of specifications that network hardware manufacturers must respect
+# 2. The OSI model is a conceptual model that characterizes the communication functions...
+# 3. The OSI model is a model that characterizes the communication functions...
+
+# Answer 1
+echo "2"
+
+# Question 2
+# How is the OSI model organized?
+# 1. Alphabetically
+# 2. From the lowest to the highest level
+# 3. Randomly
+
+# Answer 2
+echo "2"
