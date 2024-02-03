@@ -1,14 +1,4 @@
-#!/usr/bin/env bash
-# A script to answer the questions about TCP and UDP protocols
+1
+2
+1
 
-# Answer for the TCP box
-# It is a protocol that is transferring data in a slow way but surely.
-echo "1"
-
-# Answer for the UDP box
-#It is a protocol that is transferring data in a fast way and might lose data along in the process.
-echo "2"
-
-# Answer for the TCP worker
-#Have you received boxes x, y, z?
-echo "1"
