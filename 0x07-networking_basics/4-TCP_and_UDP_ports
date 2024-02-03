@@ -1,38 +1,4 @@
 #!/usr/bin/env bash
-
-# Display listening ports with PID and program name
-
-# Check if the script is run as root
-if [[ $EUID -ne 0 ]]; then
-    echo "Please run as root (sudo) to access process information."
-    exit 1
-fi
-
-# Display header
-echo "Active Internet connections (only servers)"
-echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
-
-# Display TCP listening ports
-netstat -tuln | grep 'LISTEN' | awk '{print $1, $4, $7}' | while read -r proto local foreign; do
-    pid=$(lsof -i $local | grep LISTEN | awk '{print $2}')
-    program=$(ps -p $pid -o comm=)
-    echo "$proto       0      0 $local $foreign                     LISTEN      $pid/$program"
-done
-
-# Display UDP listening ports
-netstat -uuln | grep 'udp' | awk '{print $1, $4, $6}' | while read -r proto local foreign; do
-    pid=$(lsof -i $local | grep LISTEN | awk '{print $2}')
-    program=$(ps -p $pid -o comm=)
-    echo "$proto        0      0 $local $foreign                                 $pid/$program"
-done
-
-# Display Active UNIX domain sockets
-echo "Active UNIX domain sockets (only servers)"
-echo "Proto RefCnt Flags       Type       State         I-Node   PID/Program name    Path"
-netstat -lx | grep 'LISTEN' | awk '{print $1, $6, $7, $8, $9, $10}' | while read -r proto refcnt flags type state inode; do
-    pid=$(lsof -U -a -p $pid -t)
-    program=$(ps -p $pid -o comm=)
-    path=$(echo $inode | tr -d '[:alpha:][:punct:]')
-    echo "$proto $refcnt $flags $type $state $inode   $pid/$program    $path"
-done
+# display TCP and UDP
+netstat -lp
 
