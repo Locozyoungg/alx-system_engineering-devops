@@ -1,29 +1,5 @@
 #!/usr/bin/env bash
-# This script contains questions and answers related to networking basics.
+3
+2
+1
 
-# Question 1
-# What type of network is a computer in a local area connected to?
-# 1. Internet
-# 2. WAN
-# 3. LAN
-
-# Answer 1
-echo "3"
-
-# Question 2
-# What type of network could connect an office in one building to another office...
-# 1. Internet
-# 2. WAN
-# 3. LAN
-
-# Answer 2
-echo "2"
-
-# Question 3
-# What network do you use when you browse www.google.com from your smartphone...
-# 1. Internet
-# 2. WAN
-# 3. LAN
-
-# Answer 3
-echo "1"
