@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# This script configures Nginx to redirect /redirect_me to another page with a 301 Moved Permanently response.
+
+# Define the Nginx configuration file
+nginx_conf="/etc/nginx/sites-available/default"
+
+# Append the redirection configuration to the Nginx configuration file
+cat << EOF | sudo tee -a "$nginx_conf" > /dev/null
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+    }
+}
+EOF
+
+# Restart Nginx without using systemctl
+kill -HUP $(pgrep nginx)
