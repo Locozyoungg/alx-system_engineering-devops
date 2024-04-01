@@ -1,23 +1,45 @@
 #!/usr/bin/env bash
-# Installs and setup haproxy
+# Bash script to install and configure HAProxy on a new Ubuntu machine
 
-apt-get install -y software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-1.8
-apt-get -y update
-apt-get install -y haproxy=1.8.\*
+# Update package repositories
+apt-get update
 
-echo "ENABLED=1" > /etc/default/haproxy
+# Install HAProxy
+apt-get install -y haproxy
 
-# Listen to web1 and web2 servers                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-echo "
-   listen load_balancer
-   bind *:80
-   mode http
-   balance roundrobin
-   option httpclose
-   option forwardfor
-   server 17272-web-01 44.200.83.158:80 check
-   server 17272-web-02 3.237.16.226:80 check
-" >> /etc/haproxy/haproxy.cfg
+# Configure HAProxy
+cat <<EOF > /etc/haproxy/haproxy.cfg
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
 
-service haproxy start
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+frontend http_front
+    bind *:80
+    stats uri /haproxy?stats
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    server web-01 [STUDENT_ID]-web-01:80 check
+    server web-02 [STUDENT_ID]-web-02:80 check
+EOF
+
+# Restart HAProxy service
+service haproxy restart
+
+echo "HAProxy has been installed and configured to send traffic to web-01 and web-02 using roundrobin algorithm."
